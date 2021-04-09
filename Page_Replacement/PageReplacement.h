@@ -302,7 +302,7 @@ int lru()
 
 
 // driver function
-int main()
+int driver_page_replacement()
 {
     int choice;
     while(1)
