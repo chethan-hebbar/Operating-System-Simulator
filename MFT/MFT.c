@@ -15,13 +15,15 @@ int pSizes[50];
 int nextCounter = 0;
 
 // worst fit Algorithm
-int worst_fit(){
+int worst_fit()
+{
 
   int pId;
   printf("Enter the process ID:: ");
   scanf("%d", &pId);
 
-  if(pId < 0 || pId > 49){
+  if (pId < 0 || pId > 49)
+  {
     printf("Wrong ID\n");
     return 0;
   }
@@ -29,7 +31,8 @@ int worst_fit(){
   printf("Enter the process size :: ");
   scanf("%d", &pSizes[pId]);
 
-  if(max_part < pSizes[pId]){
+  if (max_part < pSizes[pId])
+  {
     printf("Process cannot be accomodated as it exceeded maximum parition size\n");
     return 0;
   }
@@ -37,25 +40,32 @@ int worst_fit(){
   int worstId = -1, worstSize = -1;
   bool intFrag = false;
 
-  for(int i = 0; i <= n; i++){
+  for (int i = 0; i <= n; i++)
+  {
 
     bool notFree = false;
 
-    for(int j = 0; j < 50; j++){
+    for (int j = 0; j < 50; j++)
+    {
 
-      if(processes[j] == i){
+      if (processes[j] == i)
+      {
         notFree = true;
-        if(partitions[i] - pSizes[j] >= pSizes[pId]){
+        if (partitions[i] - pSizes[j] >= pSizes[pId])
+        {
           intFrag = true;
           break;
         }
       }
     }
 
-    if(notFree == false){
-      if(pSizes[pId] <= partitions[i]){
+    if (notFree == false)
+    {
+      if (pSizes[pId] <= partitions[i])
+      {
 
-        if(worstSize < partitions[i] - pSizes[pId]){
+        if (worstSize < partitions[i] - pSizes[pId])
+        {
 
           worstSize = partitions[i] - pSizes[pId];
           worstId = i;
@@ -64,22 +74,27 @@ int worst_fit(){
     }
   }
 
-  if(worstId == -1){
+  if (worstId == -1)
+  {
 
-    if(intFrag == true){
+    if (intFrag == true)
+    {
       printf("Internal Fragmentation for process %d\n", pId);
     }
 
-    else if(pSizes[pId] <= unused_space){
+    else if (pSizes[pId] <= unused_space)
+    {
       printf("External Fragmentation for process %d\n", pId);
     }
 
-    else{
+    else
+    {
       printf("Process size is larger than all available partitions\n");
     }
   }
 
-  else{
+  else
+  {
     printf("Process %d can be inserted at partition %d\n", pId, worstId);
     processes[pId] = worstId;
   }
@@ -88,13 +103,15 @@ int worst_fit(){
 }
 
 // best fit algorithm
-int best_fit(){
+int best_fit()
+{
 
   int pId;
   printf("Enter the process ID:: ");
   scanf("%d", &pId);
 
-  if(pId < 0 || pId > 49){
+  if (pId < 0 || pId > 49)
+  {
     printf("Wrong ID\n");
     return 0;
   }
@@ -102,7 +119,8 @@ int best_fit(){
   printf("Enter the process size :: ");
   scanf("%d", &pSizes[pId]);
 
-  if(max_part < pSizes[pId]){
+  if (max_part < pSizes[pId])
+  {
     printf("Process cannot be accomodated as it exceeded maximum parition size\n");
     return 0;
   }
@@ -110,25 +128,32 @@ int best_fit(){
   int bestId = -1, bestSize = 9999;
   bool intFrag = false;
 
-  for(int i = 0; i <= n; i++){
+  for (int i = 0; i <= n; i++)
+  {
 
     bool notFree = false;
 
-    for(int j = 0; j < 50; j++){
+    for (int j = 0; j < 50; j++)
+    {
 
-      if(processes[j] == i){
+      if (processes[j] == i)
+      {
         notFree = true;
-        if(partitions[i] - pSizes[j] >= pSizes[pId]){
+        if (partitions[i] - pSizes[j] >= pSizes[pId])
+        {
           intFrag = true;
           break;
         }
       }
     }
 
-    if(notFree == false){
-      if(pSizes[pId] <= partitions[i]){
+    if (notFree == false)
+    {
+      if (pSizes[pId] <= partitions[i])
+      {
 
-        if(bestSize > partitions[i] - pSizes[pId]){
+        if (bestSize > partitions[i] - pSizes[pId])
+        {
 
           bestSize = partitions[i] - pSizes[pId];
           bestId = i;
@@ -137,22 +162,27 @@ int best_fit(){
     }
   }
 
-  if(bestId == -1){
+  if (bestId == -1)
+  {
 
-    if(intFrag == true){
+    if (intFrag == true)
+    {
       printf("Internal Fragmentation for process %d\n", pId);
     }
 
-    else if(pSizes[pId] <= unused_space){
+    else if (pSizes[pId] <= unused_space)
+    {
       printf("External Fragmentation for process %d\n", pId);
     }
 
-    else{
+    else
+    {
       printf("Process size is larger than all available partitions\n");
     }
   }
 
-  else{
+  else
+  {
     printf("Process %d can be inserted at partition %d\n", pId, bestId);
     processes[pId] = bestId;
   }
@@ -161,13 +191,15 @@ int best_fit(){
 }
 
 // first fit
-int first_fit(){
+int first_fit()
+{
 
   int pId;
   printf("Enter the process ID:: ");
   scanf("%d", &pId);
 
-  if(pId < 0 || pId > 49){
+  if (pId < 0 || pId > 49)
+  {
     printf("Wrong ID\n");
     return 0;
   }
@@ -175,7 +207,8 @@ int first_fit(){
   printf("Enter the process size :: ");
   scanf("%d", &pSizes[pId]);
 
-  if(max_part < pSizes[pId]){
+  if (max_part < pSizes[pId])
+  {
     printf("Process cannot be accomodated as it exceeded maximum parition size\n");
     return 0;
   }
@@ -183,23 +216,29 @@ int first_fit(){
   int firstId = -1;
   bool intFrag = false;
 
-  for(int i = 0; i <= n; i++){
+  for (int i = 0; i <= n; i++)
+  {
 
     bool notFree = false;
 
-    for(int j = 0; j < 50; j++){
+    for (int j = 0; j < 50; j++)
+    {
 
-      if(processes[j] == i){
+      if (processes[j] == i)
+      {
         notFree = true;
-        if(partitions[i] - pSizes[j] >= pSizes[pId]){
+        if (partitions[i] - pSizes[j] >= pSizes[pId])
+        {
           intFrag = true;
           break;
         }
       }
     }
 
-    if(notFree == false){
-      if(pSizes[pId] <= partitions[i]){
+    if (notFree == false)
+    {
+      if (pSizes[pId] <= partitions[i])
+      {
 
         firstId = i;
         break;
@@ -207,22 +246,27 @@ int first_fit(){
     }
   }
 
-  if(firstId == -1){
+  if (firstId == -1)
+  {
 
-    if(intFrag == true){
+    if (intFrag == true)
+    {
       printf("Internal Fragmentation for process %d\n", pId);
     }
 
-    else if(pSizes[pId] <= unused_space){
+    else if (pSizes[pId] <= unused_space)
+    {
       printf("External Fragmentation for process %d\n", pId);
     }
 
-    else{
+    else
+    {
       printf("Process size is larger than all available partitions\n");
     }
   }
 
-  else{
+  else
+  {
     printf("Process %d can be inserted at partition %d\n", pId, firstId);
     processes[pId] = firstId;
   }
@@ -231,13 +275,15 @@ int first_fit(){
 }
 
 // next fit algorithm
-int next_fit(){
+int next_fit()
+{
 
   int pId;
   printf("Enter the process ID:: ");
   scanf("%d", &pId);
 
-  if(pId < 0 || pId > 49){
+  if (pId < 0 || pId > 49)
+  {
     printf("Wrong ID\n");
     return 0;
   }
@@ -245,7 +291,8 @@ int next_fit(){
   printf("Enter the process size :: ");
   scanf("%d", &pSizes[pId]);
 
-  if(max_part < pSizes[pId]){
+  if (max_part < pSizes[pId])
+  {
     printf("Process cannot be accomodated as it exceeded maximum parition size\n");
     return 0;
   }
@@ -255,67 +302,80 @@ int next_fit(){
 
   int cycle = 0;
   printf("Counter is %d and Number of partitions = %d", nextCounter, n);
-  for(int i = nextCounter; i <= n; i++){
+  for (int i = nextCounter; i <= n; i++)
+  {
 
     bool notFree = false;
     printf("Entered the loop\n");
 
-    for(int j = 0; j < 50; j++){
+    for (int j = 0; j < 50; j++)
+    {
 
-      if(processes[j] == i){
+      if (processes[j] == i)
+      {
         printf("Partition %d is full with process %d\n", i, j);
         notFree = true;
-        if(partitions[i] - pSizes[j] >= pSizes[pId]){
+        if (partitions[i] - pSizes[j] >= pSizes[pId])
+        {
           intFrag = true;
           break;
         }
       }
     }
 
-    if(notFree == false){
+    if (notFree == false)
+    {
       printf("Partition %d is free\n", i);
 
-      if(pSizes[pId] <= partitions[i]){
+      if (pSizes[pId] <= partitions[i])
+      {
         printf("Partition %d can hold process\n", i);
         nextId = i;
-        
-        if(nextCounter == n){
+
+        if (nextCounter == n)
+        {
           printf("Counter is updated to 0\n");
           nextCounter = 0;
         }
 
-        else{
+        else
+        {
           printf("Counter updated to %d\n", i);
           nextCounter = i + 1;
         }
-        
 
         break;
       }
     }
 
-    if(i == n && cycle == 0){
+    if (i == n && cycle == 0)
+    {
       cycle = 1;
       i = 0;
     }
   }
 
-  if(nextId == -1){
+  if (nextId == -1)
+  {
 
-    if(intFrag == true){
+    if (intFrag == true)
+    {
       printf("Internal Fragmentation for process %d and counter = %d\n", pId, nextCounter);
     }
 
-    else if(pSizes[pId] <= unused_space){
+    else if (pSizes[pId] <= unused_space)
+    {
       printf("External Fragmentation for process %d and counter = %d\n", pId, nextCounter);
     }
 
-    else{
+    else
+    {
       printf("Process size is larger than all available partitions and counter = %d\n", nextCounter);
     }
   }
 
-  else{
+  else
+  {
     printf("Process %d can be inserted at partition %d and counter = %d\n", pId, nextId, nextCounter);
     processes[pId] = nextId;
   }
@@ -323,14 +383,15 @@ int next_fit(){
   return 0;
 }
 
-
 // delete
-int delete(){
+int Delete ()
+{
   int pId;
   printf("Enter the process ID :: ");
   scanf("%d", &pId);
 
-  if(pId < 0 || pId > 49){
+  if (pId < 0 || pId > 49)
+  {
     printf("Wrong ID\n");
     return 0;
   }
@@ -340,9 +401,12 @@ int delete(){
 }
 
 // display
-int display(){
-  for(int i = 0; i < 50; i++){
-    if(processes[i] != -1){
+int display()
+{
+  for (int i = 0; i < 50; i++)
+  {
+    if (processes[i] != -1)
+    {
       printf("Process %d :: Partition %d\nInternal Fragmentation :: %d\n", i, processes[i], partitions[processes[i]] - pSizes[i]);
     }
   }
@@ -350,7 +414,8 @@ int display(){
 }
 
 // driver function
-int driver_mft(){
+int MFT()
+{
 
   printf("Enter the number of partitions :: ");
   scanf("%d", &givenN);
@@ -360,19 +425,23 @@ int driver_mft(){
 
   int sum = 0;
 
-  for(n = 0; n < 50; n++){
+  for (n = 0; n < 50; n++)
+  {
 
-    if(n > givenN || sum >= size){
+    if (n > givenN || sum >= size)
+    {
       printf("Invalid partition size or size exceeded!\n");
       --n;
       break;
     }
 
-    else{
+    else
+    {
       printf("Enter the size of Partition %d :: ", n);
       scanf("%d", &partitions[n]);
 
-      if(partitions[n] > (size - sum)){
+      if (partitions[n] > (size - sum))
+      {
         printf("Unused space created\n");
         unused_space = size - sum;
         break;
@@ -380,134 +449,149 @@ int driver_mft(){
 
       sum += partitions[n];
 
-      if(max_part < partitions[n]){
+      if (max_part < partitions[n])
+      {
         max_part = partitions[n];
       }
     }
   }
 
-  for(int i = 0; i < 50; i++){
+  for (int i = 0; i < 50; i++)
+  {
     processes[i] = -1;
   }
 
-
   // switch case
   int choice = 1;
-  while(choice != 5){
+  while (choice != 5)
+  {
 
     printf("1)First-Fit\n2)Best-Fit\n3)Worst-Fit\n4)Next-Fit\n5)Stop\n");
     scanf("%d", &choice);
 
     int control = 0;
-    switch(choice){
-      case(1):
-  
-        while(control != 4){
-          printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
-          scanf("%d", &control);
+    switch (choice)
+    {
+    case (1):
 
-          switch(control){
-             case 1:
-              first_fit();
-              break;
-            
-            case 2:
-              delete();
-              break;
+      while (control != 4)
+      {
+        printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
+        scanf("%d", &control);
 
-            case 3:
-              display();
-              break;
-            
-            default:
-              for(int i = 0; i < 50; i++){
-                processes[i] = -1;
-              }
-              break;
+        switch (control)
+        {
+        case 1:
+          first_fit();
+          break;
+
+        case 2:
+          Delete ();
+          break;
+
+        case 3:
+          display();
+          break;
+
+        default:
+          for (int i = 0; i < 50; i++)
+          {
+            processes[i] = -1;
           }
+          break;
         }
+      }
 
-      case(2):
-        while(control != 4){
-          printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
-          scanf("%d", &control);
+    case (2):
+      while (control != 4)
+      {
+        printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
+        scanf("%d", &control);
 
-          switch(control){
-             case 1:
-              best_fit();
-              break;
-            
-            case 2:
-              delete();
-              break;
+        switch (control)
+        {
+        case 1:
+          best_fit();
+          break;
 
-            case 3:
-              display();
-              break;
-            
-            default:
-              for(int i = 0; i < 50; i++){
-                processes[i] = -1;
-              }
-              break;
+        case 2:
+          Delete ();
+          break;
+
+        case 3:
+          display();
+          break;
+
+        default:
+          for (int i = 0; i < 50; i++)
+          {
+            processes[i] = -1;
           }
+          break;
         }
+      }
 
-      case(3):
-        while(control != 4){
-          printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
-          scanf("%d", &control);
+    case (3):
+      while (control != 4)
+      {
+        printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
+        scanf("%d", &control);
 
-          switch(control){
-             case 1:
-              worst_fit();
-              break;
-            
-            case 2:
-              delete();
-              break;
+        switch (control)
+        {
+        case 1:
+          worst_fit();
+          break;
 
-            case 3:
-              display();
-              break;
-            
-            default:
-              for(int i = 0; i < 50; i++){
-                processes[i] = -1;
-              }
-              break;
+        case 2:
+          Delete ();
+          break;
+
+        case 3:
+          display();
+          break;
+
+        default:
+          for (int i = 0; i < 50; i++)
+          {
+            processes[i] = -1;
           }
+          break;
         }
+      }
 
-      case(4):
-        while(control != 4){
-          printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
-          scanf("%d", &control);
+    case (4):
+      while (control != 4)
+      {
+        printf("1)Insert\n2)Delete\n3)Display\n4)Stop\n");
+        scanf("%d", &control);
 
-          switch(control){
-             case 1:
-              next_fit();
-              break;
-            
-            case 2:
-              delete();
-              break;
+        switch (control)
+        {
+        case 1:
+          next_fit();
+          break;
 
-            case 3:
-              display();
-              break;
-            
-            default:
-              for(int i = 0; i < 50; i++){
-                processes[i] = -1;
-              }
-              nextCounter = 0;
-              break;
+        case 2:
+          Delete ();
+          break;
+
+        case 3:
+          display();
+          break;
+
+        default:
+          for (int i = 0; i < 50; i++)
+          {
+            processes[i] = -1;
           }
+          nextCounter = 0;
+          break;
         }
+      }
 
-      default:
-        break;
+    default:
+      break;
     }
   }
 
