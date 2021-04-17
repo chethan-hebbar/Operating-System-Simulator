@@ -9,13 +9,14 @@ using namespace std;
 int main()
 {
     int choice;
-    cout << "Enter 1 for FCFS\nEnter 2 for SJF\nEnter 3 for SRJF\n";
+    cout << "Enter 1 for FCFS\nEnter 2 for SJF\nEnter 3 for SRJF\nEnter 4 for Round Robin\nEnter 5 for Prioity\n";
     cout << "Enter your choice: " << endl;
     cin >> choice;
     //1 is FCFS
     //2 is SJF
     //3 is SRJF
     //4 is RR
+    //5 is Priority
     switch (choice)
     {
     case 1:
