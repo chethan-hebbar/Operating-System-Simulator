@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main(){
+int SCAN(){
     int i,k,n,m,sum=0,h;
     cout<<"Enter total number of tracks on the disk: ";
     cin>>m;
