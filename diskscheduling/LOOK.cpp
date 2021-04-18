@@ -1,7 +1,7 @@
 //LOOK DISK SCHEDULING
 #include<bits/stdc++.h>
 using namespace std;
-int LOOK(){
+int LOOk(){
     int i,k,n,m,sum=0,h;
     cout<<"Enter total number of tracks on the disk: ";
     cin>>m;
