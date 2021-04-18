@@ -13,11 +13,13 @@
 #include <climits>
 #include <cstring>
 using namespace std;
-#include "FCFS.cpp"
-#include "SJF.cpp"
-#include "SRJF.cpp"
-#include "RR.cpp"
-#include "Priority.cpp"
+#include "../CPU_scheduling/FCFS.cpp"
+#include "../CPU_scheduling/SJF.cpp"
+#include "../CPU_scheduling/SRJF.cpp"
+#include "../CPU_scheduling/RR.cpp"
+#include "../CPU_scheduling/Priority.cpp"
+#include "../CPU_scheduling/LRF.cpp"
+#include "../CPU_scheduling/LRJF.cpp"
 #include "../MFT/MVT.cpp"
 #include "../MFT/MFT.c"
 int main()
@@ -27,7 +29,6 @@ int main()
         int choice;
         system("CLS");
         cout << "1. Scheduling Algorithms\n2. Partitioning algorithms(MVT/MFT)\n";
-        // cout << "Enter 1 for FCFS\nEnter 2 for SJF\nEnter 3 for SRJF\nEnter 4 for Round Robin\nEnter 5 for Prioity\n";
         cout << "Enter your choice: " << endl;
         cin >> choice;
         switch (choice)
@@ -55,6 +56,11 @@ int main()
                 case 5:
                     Priority();
                     break;
+                case 6:
+                    LRF();
+                    break;
+                case 7:
+                    LRJF();
                 default:
                     break;
                 }
