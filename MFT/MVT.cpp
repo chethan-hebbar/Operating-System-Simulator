@@ -1,20 +1,3 @@
-#include <algorithm>
-#include <vector>
-#include <set>
-#include <map>
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-#include <cmath>
-#include <iostream>
-#include <math.h>
-#include <stack>
-#include <queue>
-#include <climits>
-#include <cstring>
-
-using namespace std;
-
 typedef struct
 {
     string PID;
@@ -31,6 +14,7 @@ bool if_exists(string id)
             return false;
         else
             return true;
+    return true;
 }
 
 int InsertBest(string id, int size)
@@ -222,4 +206,5 @@ int MVT(){
             ok = false;
         }
     }
+    return 0;
 }
