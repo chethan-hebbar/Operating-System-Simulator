@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main(){
+int FIFO(){
     int i,j,k,n,m,sum=0,x,y,h;
     cout<<"Enter total number of tracks on the disk: ";
     cin>>m;
