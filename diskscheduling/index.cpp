@@ -18,7 +18,7 @@ int main()
    cout<<"3.CSCAN"<<endl;
    cout<<"4.LOOK"<<endl;
    cout<<"5.CLOOK"<<endl;
-   cout<<"Enter your choice of disk scheduling algorithms(enter "0" to exit): ";
+   cout<<"Enter your choice of disk scheduling algorithms(enter 0 to exit): ";
    cin>>choice;
    switch(choice)
    {
@@ -42,7 +42,7 @@ int main()
      default:
        cout<<"Please enter a valid choice!"<<endl;
    }
-  
+
   }while(choice!=0);
-  
+
 }
