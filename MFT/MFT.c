@@ -414,7 +414,7 @@ int display()
 }
 
 // driver function
-int MFT()
+int main()
 {
 
   printf("Enter the number of partitions :: ");
@@ -437,10 +437,10 @@ int MFT()
 
     else
     {
-      printf("Enter the size of Partition %d :: ", n);
+      printf("Enter the size of Partition %d, SIZE CANNOT EXCEED %d :: ", n, size - sum);
       scanf("%d", &partitions[n]);
 
-      if (partitions[n] > (size - sum))
+      if (partitions[n] > (size - sum) && n == givenN)
       {
         printf("Unused space created\n");
         unused_space = size - sum;
