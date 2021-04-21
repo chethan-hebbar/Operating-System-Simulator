@@ -1,61 +1,61 @@
 #include<bits/stdc++.h>
 using namespace std;
 int LOOK(){
-    int i,k,n,m,sum=0,h;
+    int LOOK_i,LOOK_k,LOOK_n,LOOK_m,LOOK_sum=0,LOOK_h;
     cout<<"Enter total number of tracks on the disk: ";
-    cin>>m;
+    cin>>LOOK_m;
     cout<<"Enter total number of requests: ";
-    cin>>n;
+    cin>>LOOK_n;
     cout<<"Please enter the requests!"<<endl;
-    vector <int> a(n),l;
-    for(i=0;i<n;i++){
-        cout<<"Enter the request "<<i+1<<": ";
-        cin>>a[i];
-        if(a[i]>=m)
+    vector <int> a(LOOK_n),l;
+    for(LOOK_i=0;LOOK_i<LOOK_n;LOOK_i++){
+        cout<<"Enter the request "<< LOOK_i+1<<": ";
+        cin>>a[LOOK_i];
+        if(a[LOOK_i]>=LOOK_m)
         {
-             cout<<"Error! Unknown position of track "<<a[i]<<" on the disk \n";
+             cout<<"Error! Unknown position of track "<<a[LOOK_i]<<" on the disk \n";
         }
 
     }
     cout<<"Enter read/write head position: ";
-    cin>>h;
-    a.push_back(h);
+    cin>>LOOK_h;
+    a.push_back(LOOK_h);
     sort(a.begin(),a.end());
-    for(i=0;i<a.size();i++){
-        if(h==a[i])
+    for(LOOK_i=0;LOOK_i<a.size();LOOK_i++){
+        if(LOOK_h==a[LOOK_i])
             break;
     }
-    k=i;
-    if(k<n/2){
-        for(i=k;i<a.size();i++){
-            l.push_back(a[i]);
+    LOOK_k=LOOK_i;
+    if(LOOK_k<LOOK_n/2){
+        for(LOOK_i=LOOK_k;LOOK_i<a.size();LOOK_i++){
+            l.push_back(a[LOOK_i]);
         }
-        for(i=k-1;i>=0;i--){
-            l.push_back(a[i]);
+        for(LOOK_i=LOOK_k-1;LOOK_i>=0;LOOK_i--){
+            l.push_back(a[LOOK_i]);
         }
         cout<<"Here,Read/Write head is moving towards right side and reverses its direction afterwards!"<<endl;
     }
     else{
-        for(i=k;i>=0;i--){
-            l.push_back(a[i]);
+        for(LOOK_i=LOOK_k;LOOK_i>=0;LOOK_i--){
+            l.push_back(a[LOOK_i]);
         }
-        for(i=k+1;i<a.size();i++){
-            l.push_back(a[i]);
+        for(LOOK_i=LOOK_k+1;LOOK_i<a.size();LOOK_i++){
+            l.push_back(a[LOOK_i]);
         }
         cout<<"Here,Read/Write head is moving towards left side and reverses its direction afterwards!"<<endl;
     }
     int temp=l[0];//head h is at the beginning of vector l
     cout<<temp;
-    for(i=1;i<l.size();i++){
-            if(l[i]>=m)
+    for(LOOK_i=1;LOOK_i<l.size();LOOK_i++){
+            if(l[LOOK_i]>=LOOK_m)
             continue;
-        cout<<" -> "<<l[i];
+        cout<<" -> "<<l[LOOK_i];
         // calculating the difference for the read/write head movement
-        sum+=abs(l[i]-temp);
+        LOOK_sum+=abs(l[LOOK_i]-temp);
         // head is now at the next I/O request
-        temp=a[i];
+        temp=a[LOOK_i];
     }
     cout<<"\n";
-    cout<<"Total seek time = "<< sum<<"\n";
+    cout<<"Total seek time = "<< LOOK_sum<<"\n";
     return 0;
 }
