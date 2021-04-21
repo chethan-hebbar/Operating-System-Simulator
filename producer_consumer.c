@@ -1,140 +1,156 @@
+/* buffer ,size,overflow ,underflow, producer > costumer ,*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int time = 0;
 struct user
 {
-    int id; //avoid deadlock
-    int arvl;
-    int arvl_i; // used during waiting
-    int bust;
-    int bust_i; // remaining bust time
-    int left_hand;
-    int right_hand; //right hand first
-    struct user *left;
-    struct user *right;
-    int comp;
+    int p;
+    int producer; //1 for producer 0 for costumer -1 if completed
+    int id;       //to avoid clashes
+    int arvl;     // arrival time
+    int bust;     //bust time
+    int comp;     //completed time
 };
+int cpu_time = 0; //actual running time
 
-int main()
+int buffer;
+
+void sort(struct user *s, int n) // SORTING FOR FCFS
 {
     int i = 0;
-    int users;
-    printf("no.of people");
-    scanf("%d", &users);
-    struct user phil[users];
-    for (i = 0; i < users; i++) //input of all processes
+    for (i; i < n - 1; i++)
     {
-        phil[i].id = i + 1;
-        phil[i].left_hand = phil[i].right_hand = 0;
-        printf("enter the avrl and bust time of philosopher %d", phil[i].id);
-        scanf("%d", &phil[i].arvl);
-        scanf("%d", &phil[i].bust);
-        phil[i].arvl_i = phil[i].arvl;
-        phil[i].bust_i = phil[i].bust;
-        phil[i].comp = -1;
-        if (i == users - 1)
+        int j = i + 1;
+        for (j; j < n; j++)
         {
-            phil[i].right = &phil[0];
-            phil[0].left = &phil[i];
-        }
-        else
-        {
-            phil[i].right = &phil[i + 1];
-            phil[i + 1].left = &phil[i];
-        }
-    }
-    int left = users;
-    int p = 1;
-atr:
-    while (left) // runs until all the processes are completed
-    {
-        for (i = 0; i < users; i++)
-        {
-            if (phil[i].comp >= 0)
-                continue;
-            if (phil[i].comp == -1 && phil[i].arvl_i <= time)
+            if (s[i].arvl > s[j].arvl || (s[i].arvl == s[j].arvl && s[i].producer < s[j].producer) || (s[i].arvl == s[j].arvl && s[i].producer == s[j].producer && s[i].id > s[j].id))
             {
-                if (phil[i].right->left_hand == 0 && phil[i].right_hand == 0)
-                {
-                    phil[i].right_hand = 1;
-                    printf("philosopher %d has taken the right stick and checking for left stick if available \n", phil[i].id);
-                }
+                struct user temp;
+                temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
             }
         }
-        int dead = users;
-        for (i = 0; i < users; i++)
-        {
-            if (phil[i].right_hand)
-                dead--;
-        }
-        if (dead == 0)
-        {
-            printf("\ndeadend ......solving!!!! by giving  %d th stick to the philosopher 1\n", users);
+    }
+}
+int main()
+{
+    int prod_count;
+    int cust_count;
+    printf("buffer size:- ");
+    scanf("%d", &buffer);
+    printf("enter the number of producers and costumers :- \n");
+    scanf("%d %d", &prod_count, &cust_count);
+    struct user u[prod_count + cust_count];
 
-            phil[0].left_hand = 1;
-            phil[0].left->right_hand = 0;
-            phil[0].left->comp = -1;
-            phil[0].comp = 0;
-        }
+    int i = 0;
+    for (i = 0; i < prod_count; i++)
+    {
+        printf(" producer process %d : arrival time : ", i + 1);
+        scanf("%d", &u[i].arvl);
+        printf(" bust time :");
+        scanf("%d", &u[i].bust);
+        u[i].producer = 1;
+        u[i].p = 1;
+        u[i].id = i + 1;
+        u[i].comp = -1; // -1 indicate they cant fetch  (point number 11)
+    }
 
-        for (i = 0; i < users; i++)
+    for (i = 0; i < cust_count; i++)
+
+    {
+        printf(" customer process %d : arrival time : ", i + 1);
+        scanf("%d", &u[i + prod_count].arvl);
+        printf(" bust time :");
+        scanf("%d", &u[i + prod_count].bust);
+        u[i + prod_count].producer = 0;
+        u[i + prod_count].id = i + 1;
+        u[i + prod_count].p = 0;
+        u[i + prod_count].comp = -1;
+    }
+    sort(u, cust_count + prod_count);
+    int total = prod_count + cust_count;
+    int status = 0; //buffer
+    int y = 0;      //wait checker
+    while (prod_count + cust_count)
+    {
+        /*  if (prod_count==0 && cust_count>0 && status==0 )
+    {
+        break; // point number 11
+    }
+    else if(cust_count==0 && prod_count>0 &&status==buffer)
+    {
+        break;
+    }*/
+
+        for (i = 0; i < total; i++)
         {
-            if (phil[i].comp >= 0 || phil[i].right_hand == 0)
-                continue; //phil[i].comp==-1 && phil[i].arvl_i<=time &&
-
-            if (phil[i].right_hand)
+            if (u[i].producer == -1)
             {
-                if (phil[i].left->right_hand == 0 && phil[i].left_hand == 0)
-                {
-                    phil[i].left_hand = 1;
-                    phil[i].comp = 0;
-                    printf("philosopher %d has picked up the left stick and right stick and ready to dine\n", phil[i].id);
-                }
+                continue;
+            }
+            if ((status == 0 && u[i].producer == 0) || (status == buffer && u[i].producer == 1))
+            {
+                if (u[i].producer == 1)
+                    printf("producer process %d is waiting due to full buffer\n", u[i].id);
                 else
-                {
-                    if (p)
-                        printf("philosopher %d is waiting for the left stick till the left  philosopher to complete his/her turn\n", phil[i].id);
-                }
-            }
-        }
-        p = 0;
-        for (i = 0; i < users; i++)
-        {
-            if (phil[i].comp < 0)
+                    printf("consumer process %d is waiting due to empty buffer\n", u[i].id);
                 continue;
-            if (phil[i].comp == 0)
+            }
+            if (u[i].arvl > cpu_time)
             {
-
-                phil[i].bust_i--;
-                if (phil[i].bust_i == 0)
+                cpu_time = u[i].arvl + u[i].bust;
+            }
+            else
+            {
+                cpu_time = u[i].bust + cpu_time;
+            }
+            u[i].comp = cpu_time;
+            if (u[i].producer)
+            {
+                printf("producer process %d initiated and  completed at %d\n", u[i].id, u[i].comp);
+                status++;
+                prod_count--;
+            }
+            else
+            {
+                printf("consumer process %d initiated and completed at %d\n", u[i].id, u[i].comp);
+                status--;
+                cust_count--;
+            }
+            u[i].producer = -1;
+            y = i;
+            while (y < total)
+            {
+                if (u[y].arvl < cpu_time && u[y].producer != -1)
                 {
-                    printf("philosopher %d has finished his job and sticks are placed back\n", phil[i].id);
-                    p = 1;
-                    left--;
-                    phil[i].right_hand = 0;
-                    phil[i].left_hand = 0;
-                    phil[i].comp = time + 1;
-                    //printf
+                    if (u[y].producer == 1)
+                        printf("producer process %d waiting from time %d\n", u[y].id, u[y].arvl);
+                    if (u[y].producer == 0)
+                        printf("customer process %d waiting from time %d \n", u[y].id, u[y].arvl);
                 }
+                y++;
             }
-            else if (phil[i].comp == 0)
-            {
-                phil[i].arvl_i++;
-            }
+            break;
         }
-        time++;
     }
-    int dead = 1;
-    for (i = 0; i < users; i++)
-    {
-        if (phil[i].comp > 0)
-            dead = 0;
-        printf(" philosopher id: %d -> arrival %d bust time %d completed at  %d  \n", phil[i].id, phil[i].arvl, phil[i].bust, phil[i].comp);
-    }
-    if (dead)
-    {
-        printf("-1 in comp indicates deadend");
-    }
-    return 0;
+    printf("+..........................................................................................................+\n");
+    for (i = 0; i < total; i++)
+        if (u[i].p)
+        {
+            if (u[i].comp == -1)
+                printf("PRODUCER process %d arrived at %d   after bust time %d...couldnt complete ERROR due to buffer overflow and no consumer to consume it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+            else
+                printf("PRODUCER process %d arrived at %d   after bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+        }
+    printf("+..........................................................................................................+\n");
+    for (i = 0; i < total; i++)
+        if (u[i].p == 0)
+        {
+            if (u[i].comp == -1)
+                printf("costumer process %d arrived at %d   after bust time %d...couldnt complete ERROR due to empty buffer and no producer to produce it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+            else
+                printf("costumer process %d arrived at %d   after bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+        }
 }
