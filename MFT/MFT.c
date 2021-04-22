@@ -414,7 +414,7 @@ int display()
 }
 
 // driver function
-int main()
+int MFT()
 {
 
   printf("Enter the number of partitions :: ");

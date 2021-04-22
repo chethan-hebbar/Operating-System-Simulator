@@ -22,11 +22,11 @@ using namespace std;
 #include "../CPU_scheduling/LRJF.cpp"
 #include "../MFT/MVT.cpp"
 #include "../MFT/MFT.c"
-#include "../'Disk Scheduling'/FIFO.cpp"
-#include "../'Disk Scheduling'/CLOOK.cpp"
-#include "../'Disk Scheduling'/CSCAN.cpp"
-#include "../'Disk Scheduling'/LOOK.cpp"
-#include "../'Disk Scheduling'/SCAN.cpp"
+#include "../Disk_Scheduling/FIFO.cpp"
+#include "../Disk_Scheduling/CLOOK.cpp"
+#include "../Disk_Scheduling/CSCAN.cpp"
+#include "../Disk_Scheduling/LOOK.cpp"
+#include "../Disk_Scheduling/SCAN.cpp"
 int main()
 {
     bool ok = true;
