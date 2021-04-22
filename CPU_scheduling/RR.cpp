@@ -34,6 +34,8 @@ int RR()
     int completed = 0;
     int i = 1;
     q.push(0);
+    cout << "Enter the time quanta: " << endl;
+    cin >> timeQuanta;
     int time = p[0].at;
     while (completed < n)
     {
