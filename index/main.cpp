@@ -37,12 +37,15 @@ using namespace std;
 
 int main()
 {
+    system("CLS");
+    cout << "Welcome to CS255 mini project! (Written in C/C++)\n";
+    system("PAUSE");
     bool ok = true;
     while (ok)
     {
         int choice;
         system("CLS");
-        cout << "1. Scheduling Algorithms\n2. Partitioning algorithms(MVT/MFT)\n3. Disk scheduling\n4. Synchronization Algorithms\n5. Bankers Algo.\n6. Page Replacement\n";
+        cout << "1. Scheduling Algorithms\n2. Partitioning algorithms(MVT/MFT)\n3. Disk scheduling\n4. Synchronization Algorithms\n5. Bankers Algo.\n6. Page Replacement\n7. Exit\n";
         cout << "Enter your choice: " << endl;
         cin >> choice;
         switch (choice)
@@ -167,10 +170,9 @@ int main()
             system("PAUSE");
             break;
         default:
+            cout << "Thank you!\n";
             ok = false;
         }
-
-        
     }
     return 0;
 }

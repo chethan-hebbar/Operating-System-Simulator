@@ -38,18 +38,18 @@ int PC()
 {
     int prod_count;
     int cust_count;
-    printf("buffer size:- ");
+    printf("Enter Buffer size:- ");
     scanf("%d", &buffer);
-    printf("enter the number of producers and costumers :- \n");
+    printf("Enter the number of Producers and Consumer :- ");
     scanf("%d %d", &prod_count, &cust_count);
     struct user_pc u[prod_count + cust_count];
 
     int i = 0;
     for (i = 0; i < prod_count; i++)
     {
-        printf(" producer process %d : arrival time : ", i + 1);
+        printf("For Producer process %d\nArrival time : ", i + 1);
         scanf("%d", &u[i].arvl);
-        printf(" bust time :");
+        printf("Burst time :");
         scanf("%d", &u[i].bust);
         u[i].producer = 1;
         u[i].p = 1;
@@ -60,9 +60,9 @@ int PC()
     for (i = 0; i < cust_count; i++)
 
     {
-        printf(" customer process %d : arrival time : ", i + 1);
+        printf("For Consumer process %d\nArrival time : ", i + 1);
         scanf("%d", &u[i + prod_count].arvl);
-        printf(" bust time :");
+        printf("Burst time :");
         scanf("%d", &u[i + prod_count].bust);
         u[i + prod_count].producer = 0;
         u[i + prod_count].id = i + 1;
@@ -93,9 +93,9 @@ int PC()
             if ((status == 0 && u[i].producer == 0) || (status == buffer && u[i].producer == 1))
             {
                 if (u[i].producer == 1)
-                    printf("producer process %d is waiting due to full buffer\n", u[i].id);
+                    printf("[+]BUFFER FULL! Producer process: %d is waiting...\n", u[i].id);
                 else
-                    printf("consumer process %d is waiting due to empty buffer\n", u[i].id);
+                    printf("[+]BUFFER EMPTY! consumer process: %d is waiting due to empty buffer\n", u[i].id);
                 continue;
             }
             if (u[i].arvl > cpu_time)
@@ -109,13 +109,13 @@ int PC()
             u[i].comp = cpu_time;
             if (u[i].producer)
             {
-                printf("producer process %d initiated and  completed at %d\n", u[i].id, u[i].comp);
+                printf("Producer process: %d initiated and completed at: %d\n", u[i].id, u[i].comp);
                 status++;
                 prod_count--;
             }
             else
             {
-                printf("consumer process %d initiated and completed at %d\n", u[i].id, u[i].comp);
+                printf("Consumer process: %d initiated and completed at: %d\n", u[i].id, u[i].comp);
                 status--;
                 cust_count--;
             }
@@ -126,31 +126,31 @@ int PC()
                 if (u[y].arvl < cpu_time && u[y].producer != -1)
                 {
                     if (u[y].producer == 1)
-                        printf("producer process %d waiting from time %d\n", u[y].id, u[y].arvl);
+                        printf("Producer process: %d waiting from time: %d\n", u[y].id, u[y].arvl);
                     if (u[y].producer == 0)
-                        printf("customer process %d waiting from time %d \n", u[y].id, u[y].arvl);
+                        printf("Consumer process: %d waiting from time: %d \n", u[y].id, u[y].arvl);
                 }
                 y++;
             }
             break;
         }
     }
-    printf("+..........................................................................................................+\n");
+    printf("[+]..........................................................................................................+\n");
     for (i = 0; i < total; i++)
         if (u[i].p)
         {
             if (u[i].comp == -1)
-                printf("PRODUCER process %d arrived at %d   after bust time %d...couldnt complete ERROR due to buffer overflow and no consumer to consume it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("[+]COULDNT CONSUME DUE TO BUFFER OVERFLOW... PRODUCER process: %d arrived at: %d   after burst time: %d...\n", u[i].id, u[i].arvl, u[i].bust);
             else
-                printf("PRODUCER process %d arrived at %d   after bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("PRODUCER process: %d arrived at: %d   after burst time: %d... completed at time: %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
         }
-    printf("+..........................................................................................................+\n");
+    printf("[+]..........................................................................................................+\n");
     for (i = 0; i < total; i++)
         if (u[i].p == 0)
         {
             if (u[i].comp == -1)
-                printf("costumer process %d arrived at %d   after bust time %d...couldnt complete ERROR due to empty buffer and no producer to produce it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("[+]COULDNT CONSUME DUE TO EMPTY BUFFER... Consumer process: %d arrived at: %d   after burst time: %d...\n", u[i].id, u[i].arvl, u[i].bust);
             else
-                printf("costumer process %d arrived at %d   after bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("Consumer process: %d arrived at: %d   after burst time: %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
         }
 }

@@ -31,7 +31,7 @@ struct reader *read(struct reader *RP, int readers_count) // read function allow
         if (R[i].arvl_i <= time_cpu && R[i].cont >= 0)
         {
             if (R[i].cont == 0)
-                printf("reading %d at time %d\n ", R[i].id, time_cpu);
+                printf("Reader %d arrived at time %d\n", R[i].id, time_cpu);
             R[i].bust_i--;
             R[i].arvl_i++;
             if (R[i].bust_i <= 0) //processs complete
@@ -40,7 +40,7 @@ struct reader *read(struct reader *RP, int readers_count) // read function allow
                 R[i].cont = -1;
                 R[i].arvl_i = -1;
                 R[i].comp = time_cpu + 1;
-                printf("                                                read %d at time %d\n", R[i].id, time_cpu + 1);
+                printf("[+]. Reader %d completed at time %d\n", R[i].id, time_cpu + 1);
             }
             else
             {
@@ -76,16 +76,16 @@ int RW()
     int writers_count;
     int i;
 
-    printf("no.of readers:- ");
+    printf("Enter no. of readers:- ");
     scanf("%d", &readers_count);
-    printf("no.of writers:- ");
+    printf("Enter no. of writers:- ");
     scanf("%d", &writers_count);
     struct reader RD[readers_count + 1];
     struct writer WT[writers_count + 1];
 
     for (i = 0; i < readers_count; i++)
     {
-        printf("\nreader %d: arrl time and bust time :- ", i + 1);
+        printf("\nFor Reader %d:\nEnter its arrival time and burst time :- ", i + 1);
         scanf("%d %d", &RD[i].arvl, &RD[i].bust);
         RD[i].id = i + 1;
         RD[i].cont = 0;
@@ -95,7 +95,7 @@ int RW()
     for (i = 0; i < writers_count; i++)
     {
         WT[i].id = i + 1;
-        printf("\nwriter %d: arrl time and bust time :- ", i + 1);
+        printf("\nFor writer %d:\nEnter its arrival time and burst time :- ", i + 1);
         scanf("%d %d", &WT[i].arvl, &WT[i].bust);
 
         WT[i].complete = 0;
@@ -123,13 +123,13 @@ strt:
 
             if (rw_time <= time_cpu && rw_time >= WT[i].arvl && WT[i].complete == 0)
             {
-                printf("writing %d at time %d\n", WT[i].id, time_cpu);
+                printf("Writer %d arrived at time %d\n", WT[i].id, time_cpu);
                 time_cpu = time_cpu + WT[i].bust;
                 WT[i].complete = 1;
                 WT[i].comp = time_cpu;
                 cpu += WT[i].bust;
                 rw_left--;
-                printf("                                                wrote %d at time %d\n", WT[i].id, time_cpu);
+                printf("[+]. Writer %d completed at time %d\n", WT[i].id, time_cpu);
                 goto strt;
             }
         }
@@ -151,15 +151,16 @@ strt:
             cpu = 0;
         }
     } //output
-
+    printf("[+]..........................................................................................................+\n");
     for (i = 0; i < writers_count; i++)
     {
-        printf("writer \"%d\" arrived at %d with %d bust time completed at %d \n", WT[i].id, WT[i].arvl, WT[i].bust, WT[i].comp);
+        printf("Writer \"%d\" arrived at: %d with burst time: %d completed at: %d \n", WT[i].id, WT[i].arvl, WT[i].bust, WT[i].comp);
     }
     printf("\n");
     for (i = 0; i < readers_count; i++)
     {
-        printf("reader \"%d\" arrived at %d with %d bust time completed reading at %d \n", RD[i].id, RD[i].arvl, RD[i].bust, RD[i].comp);
+        printf("Reader \"%d\" arrived at: %d with burst time: %d completed reading at: %d \n", RD[i].id, RD[i].arvl, RD[i].bust, RD[i].comp);
     }
+    printf("[+]..........................................................................................................+\n");
     return 0;
 }

@@ -14,7 +14,7 @@ int getData()
 {
     printf("Enter length of page reference sequence: ");
     scanf("%d",&pn);
-    printf("Enter the page reference sequence:\n");
+    printf("Enter the page reference sequence: \n");
     for(i=0; i<pn; i++)
         scanf("%d",&in[i]);
     printf("Enter no of frames:");
@@ -73,7 +73,7 @@ int dispPages()
     for(k = 0; k < nf; k++)
     {
         if(p[k] != 9999)
-            printf(" %d", p[k]);
+            printf("%d", p[k]);
     }
 
     return 0;
@@ -81,7 +81,7 @@ int dispPages()
 
 int dispPgFaultCnt()
 {
-    printf("\nTotal no of page faults:%d\n", pgfaultcnt);
+    printf("\nTotal no of page faults: %d\n", pgfaultcnt);
     printf("Page fault ratio = %lf\n", (double)pgfaultcnt / (double)pn);
     return 0;
 }
