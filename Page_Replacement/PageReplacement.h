@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 // global vars
-int n,nf; // number of frames and number of pages
+int pn,nf; // number of frames and number of pages
 int in[100];    // sequence of pages
 int p[50];      // frames
 int hit=0;      // hit
@@ -13,9 +13,9 @@ int pgfaultcnt=0;   // number of page faults
 int getData()
 {
     printf("Enter length of page reference sequence: ");
-    scanf("%d",&n);
+    scanf("%d",&pn);
     printf("Enter the page reference sequence:\n");
-    for(i=0; i<n; i++)
+    for(i=0; i<pn; i++)
         scanf("%d",&in[i]);
     printf("Enter no of frames:");
     scanf("%d",&nf);
@@ -82,7 +82,7 @@ int dispPages()
 int dispPgFaultCnt()
 {
     printf("\nTotal no of page faults:%d\n", pgfaultcnt);
-    printf("Page fault ratio = %lf\n", (double)pgfaultcnt / (double)n);
+    printf("Page fault ratio = %lf\n", (double)pgfaultcnt / (double)pn);
     return 0;
 }
 
@@ -90,7 +90,7 @@ int dispPgFaultCnt()
 int fifo()
 {
     initialize();
-    for(i = 0; i < n; i++)
+    for(i = 0; i < pn; i++)
     {
         printf("\nFor %d :", in[i]);
 
@@ -121,7 +121,7 @@ int optimal()
 {
     initialize();
     int near[50];
-    for(i = 0; i < n; i++)
+    for(i = 0; i < pn; i++)
     {
 
         printf("\nFor %d :", in[i]);
@@ -134,7 +134,7 @@ int optimal()
             {
                 int pg = p[j];
                 int found = 0;
-                for(k = i; k < n; k++)
+                for(k = i; k < pn; k++)
                 {
                     // checking if page in frame is in sequence or not
                     if(pg == in[k])
@@ -185,7 +185,7 @@ int mru()
     initialize();
 
     int most[50];
-    for(i = 0; i < n; i++)
+    for(i = 0; i < pn; i++)
     {
 
         printf("\nFor %d :", in[i]);
@@ -246,7 +246,7 @@ int lru()
     initialize();
 
     int least[50];
-    for(i = 0; i < n; i++)
+    for(i = 0; i < pn; i++)
     {
 
         printf("\nFor %d :", in[i]);
@@ -302,7 +302,7 @@ int lru()
 
 
 // driver function
-int driver_page_replacement()
+int PAGE()
 {
     int choice;
     while(1)

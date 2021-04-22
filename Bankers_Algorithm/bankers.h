@@ -1,21 +1,22 @@
 #include <stdio.h>
- 
-int current[5][5], maximum_claim[5][5], available[5];
-int allocation[5] = {0, 0, 0, 0, 0};
-int maxres[5], running[5], safe = 0;
-int counter = 0, i, j, exec, resources, processes, k = 1;
+
  
 // driver function
-int driver_bankers()
-{   
-    printf("We have 5 different resources :: R0 R1 R2 R3 R4 \n");
+int Bankers()
+{
+
+	int current[5][5], maximum_claim[5][5], available[5];
+	int allocation[5] = {0, 0, 0, 0, 0};
+	int maxres[5], running[5], safe = 0;
+	int counter = 0, i, j, exec, resources, processe, k = 1;
+	printf("We have 5 different resources :: R0 R1 R2 R3 R4 \n");
 	printf("\nEnter number of processes: ");
-    	scanf("%d", &processes);
+    	scanf("%d", &processe);
 	
 	int sequence[5] = {};
 	int seqCounter = 0;
 
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
         	running[i] = 1;
         	counter++;
@@ -31,7 +32,7 @@ int driver_bankers()
     	}
  
    	printf("\nEnter allocated resources for processes:\n");
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
 	        for(j = 0; j < resources; j++) 
 		{
@@ -40,7 +41,7 @@ int driver_bankers()
     	}
  
     	printf("\nEnter required resources for processes:\n");
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
         	for(j = 0; j < resources; j++) 
 		{
@@ -55,7 +56,7 @@ int driver_bankers()
 	}
  
     	printf("\n\nThe Allocated Resources Table:\n");
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
 	        for (j = 0; j < resources; j++) 
 		{
@@ -65,7 +66,7 @@ int driver_bankers()
     	}
  
     	printf("\nThe Required Resources Table:\n");
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
         	for (j = 0; j < resources; j++) 
 		{
@@ -74,7 +75,7 @@ int driver_bankers()
         	printf("\n");
     	}
  
-    	for (i = 0; i < processes; i++) 
+    	for (i = 0; i < processe; i++) 
 	{
         	for (j = 0; j < resources; j++) 
 		{
@@ -103,7 +104,7 @@ int driver_bankers()
     	while (counter != 0) 
 	{
         	safe = 0;
-        	for (i = 0; i < processes; i++) 
+        	for (i = 0; i < processe; i++) 
 		{
             		if (running[i]) 
 			{
@@ -143,7 +144,7 @@ int driver_bankers()
             		printf("\nThe system is in a safe state");
 					printf("\nThe safe sequence :: ");
 
-					for(int i = 0; i < processes; i++){
+					for(int i = 0; i < processe; i++){
 						printf("P%d ", sequence[i]);
 					}
 

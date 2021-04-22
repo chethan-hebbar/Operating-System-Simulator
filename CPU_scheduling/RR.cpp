@@ -1,6 +1,6 @@
 int RR()
 {
-    cout << "This is RR CPU scheduling algorithm" << endl;
+    cout << "This is Round robin CPU scheduling algorithm" << endl;
     struct process
     {
         int id;
@@ -78,12 +78,6 @@ int RR()
         total_TAT += tat[i];
         total_WT += wt[i];
     }
-    cout << "COMPLETION TIME" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << ct[i] << endl;
-    }
-    cout << "COMPLETION TIME ENDS" << endl;
     cout << "Input:" << endl;
     cout << endl;
     cout << "P.No"
@@ -96,14 +90,22 @@ int RR()
         cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << endl;
     }
     cout << endl;
-    cout << "Output from RR algorithm:" << endl;
+    cout << "Output from Round robin scheduling algorithm:" << endl;
     cout << endl;
-    cout << "TAT"
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT"
+         << "\t"
+         << "CT"
+         << "\t"
+         << "TAT"
          << "\t"
          << "WT" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << tat[i] << "\t" << wt[i] << endl;
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << "\t" << ct[i] << "\t" << tat[i] << "\t" << wt[i] << endl;
     }
     cout << endl;
     float avgTAT = (float)total_TAT / (float)n;

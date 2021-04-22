@@ -49,12 +49,12 @@ int Priority()
                 cout << "At time= " << time << " process " << i << " is enqueued " << endl;
             }
         }
-        int maxP = -1, minBTP = -1;
+        int minP = 1000, minBTP = -1;
         for (int i = 0; i < n; i++)
         {
-            if (p[i].in_queue == 1 && p[i].completed == 0 && p[i].pri > maxP)
+            if (p[i].in_queue == 1 && p[i].completed == 0 && p[i].pri < minP)
             {
-                maxP = p[i].bt;
+                minP = p[i].pri;
                 minBTP = i;
             }
         }
@@ -86,11 +86,50 @@ int Priority()
         }
     }
     int tat[n], wt[n];
+    int total_TAT = 0, total_WT = 0;
     for (int i = 0; i < n; i++)
     {
         tat[i] = p[i].ct - p[i].at;
         wt[i] = tat[i] - p[i].bt2;
-        cout << wt[i] << endl;
+        total_TAT += tat[i];
+        total_WT += wt[i];
+        //cout << wt[i] << endl;
     }
+    cout << "Input:" << endl;
+    cout << endl;
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT"
+         << "\t"
+         << "Priority" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << "\t" << p[i].pri <<endl;
+    }
+    cout << endl;
+    cout << "Output from Priority based preemptive CPU scheduling algorithm:" << endl;
+    cout << endl;
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT"
+         << "\t"
+         << "CT"
+         << "\t"
+         << "TAT"
+         << "\t"
+         << "WT" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << "\t" << p[i].ct << "\t" << tat[i] << "\t" << wt[i] << endl;
+    }
+    cout << endl;
+    float avgTAT = (float)total_TAT / (float)n;
+    float avgWT = (float)total_WT / (float)n;
+    cout << "Average TAT: " << avgTAT << endl
+         << "Average WT: " << avgWT << endl;
     return 0;
 }

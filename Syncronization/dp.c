@@ -16,7 +16,7 @@ struct user
     int comp;
 };
 
-int main()
+int DP()
 {
     int i = 0;
     int users;

@@ -18,9 +18,9 @@ struct writer
     int comp;
     int complete; //check if it is completed(1) or not(0)
 };
-int time = 0; // queue time different from cpu time(original time)
+int rw_time = 0; // queue time different from cpu time(original time)
 int time_cpu = 0;
-int left = 0;                                             // processes left
+int rw_left = 0;                                             // processes left
 struct reader *read(struct reader *RP, int readers_count) // read function allow the eligible reader to read at a time
 
 {
@@ -36,7 +36,7 @@ struct reader *read(struct reader *RP, int readers_count) // read function allow
             R[i].arvl_i++;
             if (R[i].bust_i <= 0) //processs complete
             {
-                left--;
+                rw_left--;
                 R[i].cont = -1;
                 R[i].arvl_i = -1;
                 R[i].comp = time_cpu + 1;
@@ -69,7 +69,7 @@ struct writer *sort(struct writer *S, int n) //sorting the writer who came first
     }
     return S;
 }
-int main()
+int RW()
 {
 
     int readers_count;
@@ -101,12 +101,12 @@ int main()
         WT[i].complete = 0;
     }
 
-    left = readers_count + writers_count;
+    rw_left = readers_count + writers_count;
     int cpu = 0;
     //to check any process is running in cpu means if cpu is free it is zero ,then we increment the value of time
     sort(WT, writers_count);
 strt:
-    while (left > 0)
+    while (rw_left > 0)
     { //if a reader is already reading ,we cant write so we check if any the readers is continuing
         for (i = 0; i < readers_count; i++)
         {
@@ -121,21 +121,21 @@ strt:
         for (i = 0; i < writers_count; i++)
         {
 
-            if (time <= time_cpu && time >= WT[i].arvl && WT[i].complete == 0)
+            if (rw_time <= time_cpu && rw_time >= WT[i].arvl && WT[i].complete == 0)
             {
                 printf("writing %d at time %d\n", WT[i].id, time_cpu);
                 time_cpu = time_cpu + WT[i].bust;
                 WT[i].complete = 1;
                 WT[i].comp = time_cpu;
                 cpu += WT[i].bust;
-                left--;
+                rw_left--;
                 printf("                                                wrote %d at time %d\n", WT[i].id, time_cpu);
                 goto strt;
             }
         }
         for (i = 0; i < readers_count; i++)
         { //printf("4");
-            if (time <= time_cpu && time >= RD[i].arvl_i && RD[i].cont >= 0)
+            if (rw_time <= time_cpu && rw_time >= RD[i].arvl_i && RD[i].cont >= 0)
             {
                 //read function
                 read(RD, readers_count);
@@ -143,7 +143,7 @@ strt:
                 goto strt;
             }
         }
-        time++;
+        rw_time++;
         cpu--;
         if (cpu < 0)
         {

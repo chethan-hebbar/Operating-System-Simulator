@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct user
+struct user_pc
 {
     int p;
     int producer; //1 for producer 0 for costumer -1 if completed
@@ -16,7 +16,7 @@ int cpu_time = 0; //actual running time
 
 int buffer;
 
-void sort(struct user *s, int n) // SORTING FOR FCFS
+void sort(struct user_pc *s, int n) // SORTING FOR FCFS
 {
     int i = 0;
     for (i; i < n - 1; i++)
@@ -26,7 +26,7 @@ void sort(struct user *s, int n) // SORTING FOR FCFS
         {
             if (s[i].arvl > s[j].arvl || (s[i].arvl == s[j].arvl && s[i].producer < s[j].producer) || (s[i].arvl == s[j].arvl && s[i].producer == s[j].producer && s[i].id > s[j].id))
             {
-                struct user temp;
+                struct user_pc temp;
                 temp = s[i];
                 s[i] = s[j];
                 s[j] = temp;
@@ -34,7 +34,7 @@ void sort(struct user *s, int n) // SORTING FOR FCFS
         }
     }
 }
-int main()
+int PC()
 {
     int prod_count;
     int cust_count;
@@ -42,7 +42,7 @@ int main()
     scanf("%d", &buffer);
     printf("enter the number of producers and costumers :- \n");
     scanf("%d %d", &prod_count, &cust_count);
-    struct user u[prod_count + cust_count];
+    struct user_pc u[prod_count + cust_count];
 
     int i = 0;
     for (i = 0; i < prod_count; i++)
@@ -75,14 +75,14 @@ int main()
     int y = 0;      //wait checker
     while (prod_count + cust_count)
     {
-        /*  if (prod_count==0 && cust_count>0 && status==0 )
+          if (prod_count==0 && cust_count>0 && status==0 )
     {
         break; // point number 11
     }
     else if(cust_count==0 && prod_count>0 &&status==buffer)
     {
         break;
-    }*/
+    }
 
         for (i = 0; i < total; i++)
         {

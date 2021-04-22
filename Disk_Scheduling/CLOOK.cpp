@@ -1,4 +1,17 @@
-#include<bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <unordered_set>
+#include <string>
+#include <cmath>
+#include <iostream>
+#include <math.h>
+#include <stack>
+#include <queue>
+#include <climits>
+#include <cstring>
 using namespace std;
 int CLOOK(){
     int clook_i,clook_k,clook_n,clook_m,clook_sum=0,clook_h;

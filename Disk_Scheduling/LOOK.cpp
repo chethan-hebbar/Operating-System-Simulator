@@ -1,4 +1,17 @@
-#include<bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <unordered_set>
+#include <string>
+#include <cmath>
+#include <iostream>
+#include <math.h>
+#include <stack>
+#include <queue>
+#include <climits>
+#include <cstring>
 using namespace std;
 int LOOK(){
     int LOOK_i,LOOK_k,LOOK_n,LOOK_m,LOOK_sum=0,LOOK_h;

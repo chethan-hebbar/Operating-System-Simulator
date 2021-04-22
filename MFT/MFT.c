@@ -384,7 +384,7 @@ int next_fit()
 }
 
 // delete
-int Delete ()
+int Delete()
 {
   int pId;
   printf("Enter the process ID :: ");
@@ -440,7 +440,7 @@ int MFT()
       printf("Enter the size of Partition %d, SIZE CANNOT EXCEED %d :: ", n, size - sum);
       scanf("%d", &partitions[n]);
 
-      if (partitions[n] > (size - sum) && n == givenN)
+      if (partitions[n] > (size - sum) && n + 1 == givenN)
       {
         printf("Unused space created\n");
         unused_space = size - sum;
@@ -486,7 +486,7 @@ int MFT()
           break;
 
         case 2:
-          Delete ();
+          Delete();
           break;
 
         case 3:
@@ -515,7 +515,7 @@ int MFT()
           break;
 
         case 2:
-          Delete ();
+          Delete();
           break;
 
         case 3:
@@ -544,7 +544,7 @@ int MFT()
           break;
 
         case 2:
-          Delete ();
+          Delete();
           break;
 
         case 3:
@@ -573,7 +573,7 @@ int MFT()
           break;
 
         case 2:
-          Delete ();
+          Delete();
           break;
 
         case 3:

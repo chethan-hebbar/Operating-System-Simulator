@@ -27,11 +27,6 @@ int SJF()
             }
         }
     }
-    cout << "Sorted:" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << p[i].at << " " << p[i].bt << endl;
-    }
     int check[n] = {0};
     int time = p[0].at;
     int complete = 0;
@@ -54,14 +49,13 @@ int SJF()
             time = time + minBT;
             ct[pid] = time;
             complete++;
-            cout << "At t= " << time << "Process " << pid << " is completed" << endl;
+            cout << "At time t= " << time << " Process: " << p[pid].id << " is completed" << endl;
         }
         else
         {
             for (int i = 0; i < n; i++)
             {
-                int id = p[i].id;
-                if (check[id] == 0)
+                if (check[i] == 0)
                 {
                     time = p[i].at;
                 }
@@ -95,12 +89,20 @@ int SJF()
     cout << endl;
     cout << "Output from SJF scheduling algorithm:" << endl;
     cout << endl;
-    cout << "TAT"
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT"
+         << "\t"
+         << "CT"
+         << "\t"
+         << "TAT"
          << "\t"
          << "WT" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << tat[i] << "\t" << wt[i] << endl;
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt << "\t" << ct[i] << "\t" << tat[i] << "\t" << wt[i] << endl;
     }
     cout << endl;
     float avgTAT = (float)total_TAT / (float)n;

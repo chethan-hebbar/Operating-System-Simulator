@@ -1,6 +1,6 @@
 int LRJF()
 {
-    cout << "This is SRJF CPU scheduling algorithm" << endl;
+    cout << "This is LRJF CPU scheduling algorithm" << endl;
     struct process
     {
         int id;
@@ -85,11 +85,48 @@ int LRJF()
         }
     }
     int tat[n], wt[n];
+    int total_TAT = 0, total_WT = 0;
     for (int i = 0; i < n; i++)
     {
         tat[i] = p[i].ct - p[i].at;
         wt[i] = tat[i] - p[i].bt2;
-        cout << wt[i] << endl;
+        total_TAT += tat[i];
+        total_WT += wt[i];
+        //cout << wt[i] << endl;
     }
+    cout << "Input:" << endl;
+    cout << endl;
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << endl;
+    }
+    cout << endl;
+    cout << "Output from LRJF scheduling algorithm:" << endl;
+    cout << endl;
+    cout << "P.No"
+         << "\t"
+         << "AT"
+         << "\t"
+         << "BT"
+         << "\t"
+         << "CT"
+         << "\t"
+         << "TAT"
+         << "\t"
+         << "WT" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt2 << "\t" << p[i].ct << "\t" << tat[i] << "\t" << wt[i] << endl;
+    }
+    cout << endl;
+    float avgTAT = (float)total_TAT / (float)n;
+    float avgWT = (float)total_WT / (float)n;
+    cout << "Average TAT: " << avgTAT << endl
+         << "Average WT: " << avgWT << endl;
     return 0;
 }

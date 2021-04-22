@@ -1,6 +1,6 @@
-int FCFS()
+int HRRN()
 {
-    cout << "This is FCFS CPU scheduling algorithm" << endl;
+    cout << "This is HRRN CPU scheduling algorithm" << endl;
     struct process
     {
         int id;
@@ -11,10 +11,10 @@ int FCFS()
     cout << "Enter the number of processes: ";
     cin >> n;
     struct process p[n];
+    int minTime = INT8_MAX;
     cout << "Enter the id, at and bt respectively: \n";
     for (int i = 0; i < n; i++)
     {
-
         cin >> p[i].id >> p[i].at >> p[i].bt;
     }
     for (int i = 0; i < n; i++)
@@ -27,17 +27,42 @@ int FCFS()
             }
         }
     }
+    int check[n] = {0};
+    int time = p[0].at;
+    int complete = 0;
     int ct[n];
-    ct[0] = p[0].bt + p[0].at;
-    for (int i = 1; i < n; i++)
+    while (complete < n)
     {
-        if (p[i].at <= ct[i - 1])
+        int pid = -1;
+        float HRT = -1;
+        for (int j = 0; j < n; j++)
         {
-            ct[i] = ct[i - 1] + p[i].bt;
+            float response_ratio;
+            if (check[j] == 0 && p[j].at <= time)
+                response_ratio = (float)(p[j].bt + abs(time - p[j].at)) / (float)p[j].bt;
+            if (check[j] == 0 && p[j].at <= time && HRT < response_ratio)
+            {
+                HRT = response_ratio;
+                pid = j;
+            }
+        }
+        if (pid != -1)
+        {
+            check[pid] = 1;
+            time = time + p[pid].bt;
+            ct[pid] = time;
+            complete++;
+            cout << "At t= " << time << " Process " << pid << " is completed" << endl;
         }
         else
         {
-            ct[i] = p[i].at + p[i].bt;
+            for (int i = 0; i < n; i++)
+            {
+                if (check[i] == 0)
+                {
+                    time = p[i].at;
+                }
+            }
         }
     }
     int total_TAT = 0, total_WT = 0;
@@ -61,7 +86,7 @@ int FCFS()
         cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt << endl;
     }
     cout << endl;
-    cout << "Output from FCFS scheduling algorithm:" << endl;
+    cout << "Output from HRRN scheduling algorithm:" << endl;
     cout << endl;
     cout << "P.No"
          << "\t"
@@ -85,4 +110,3 @@ int FCFS()
          << "Average WT: " << avgWT << endl;
     return 0;
 }
-

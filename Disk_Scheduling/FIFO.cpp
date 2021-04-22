@@ -1,4 +1,17 @@
-#include<bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <unordered_set>
+#include <string>
+#include <cmath>
+#include <iostream>
+#include <math.h>
+#include <stack>
+#include <queue>
+#include <climits>
+#include <cstring>
 using namespace std;
 int FIFO(){
     int FIFO_i,FIFO_j,FIFO_k,FIFO_n,FIFO_m,FIFO_sum=0,FIFO_x,FIFO_y,FIFO_h;
