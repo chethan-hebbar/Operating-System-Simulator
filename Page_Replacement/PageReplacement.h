@@ -121,63 +121,70 @@ int optimal()
 {
     initialize();
     int near[50];
-    for(i = 0; i < pn; i++)
+    for (i = 0; i < pn; i++)
     {
 
         printf("\nFor %d :", in[i]);
 
-        // checking for page fault
-        if(isHit(in[i]) == 0)
+        if (isHit(in[i]) == 0)
         {
-            // looping to get farthest dist page already in frames
-            for(j = 0; j < nf; j++)
+            int frameEmpty = 1;
+            for (int k = 0; k < nf; k++)
             {
-                int pg = p[j];
-                int found = 0;
-                for(k = i; k < pn; k++)
+                if (p[k] == 9999)
                 {
-                    // checking if page in frame is in sequence or not
-                    if(pg == in[k])
+                    p[k] = in[i];
+                    dispPages();
+                    frameEmpty = 0;
+                    pgfaultcnt++;
+                    break;
+                }
+            }
+
+            if (frameEmpty)
+            {
+
+                for (j = 0; j < nf; j++)
+                {
+                    int pg = p[j];
+                    int found = 0;
+                    for (k = i; k < pn; k++)
                     {
-                        near[j] = k;
-                        found = 1;
-                        break;
+                        if (pg == in[k])
+                        {
+                            near[j] = k;
+                            found = 1;
+                            break;
+                        }
+                        else
+                            found = 0;
                     }
-                    else
-                        found = 0;
+                    if (!found)
+                        near[j] = 9999;
                 }
-                if(!found)
-                    near[j] = 9999;
-            }
-
-            // getting farthest page
-            int max = -9999;
-            int repindex;
-            for(j = 0; j < nf; j++)
-            {
-                if(near[j] > max)
+                int max = -9999;
+                int repindex;
+                for (j = 0; j < nf; j++)
                 {
-                    max = near[j];
-                    repindex = j;
+                    if (near[j] > max)
+                    {
+                        max = near[j];
+                        repindex = j;
+                    }
                 }
+                p[repindex] = in[i];
+                pgfaultcnt++;
+
+                dispPages();
             }
-
-            // replacing requested page with farthest use page
-            p[repindex] = in[i];
-            pgfaultcnt++;
-
-            dispPages();
         }
-
         else
             printf("No page fault");
     }
-
     dispPgFaultCnt();
 
     return 0;
 }
-
 
 // most recently used page algorithm
 int mru()

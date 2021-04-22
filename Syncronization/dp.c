@@ -20,14 +20,14 @@ int DP()
 {
     int i = 0;
     int users;
-    printf("no.of people");
+    printf("No.of processes/philosipher: ");
     scanf("%d", &users);
     struct user phil[users];
     for (i = 0; i < users; i++) //input of all processes
     {
         phil[i].id = i + 1;
         phil[i].left_hand = phil[i].right_hand = 0;
-        printf("enter the avrl and bust time of philosopher %d", phil[i].id);
+        printf("enter the arrival and burst time of philosopher: %d", phil[i].id);
         scanf("%d", &phil[i].arvl);
         scanf("%d", &phil[i].bust);
         phil[i].arvl_i = phil[i].arvl;
@@ -58,7 +58,7 @@ atr:
                 if (phil[i].right->left_hand == 0 && phil[i].right_hand == 0)
                 {
                     phil[i].right_hand = 1;
-                    printf("philosopher %d has taken the right stick and checking for left stick if available \n", phil[i].id);
+                    printf("Philosopher %d has taken the right stick... Checking if left stick is available...\n", phil[i].id);
                 }
             }
         }
@@ -70,7 +70,7 @@ atr:
         }
         if (dead == 0)
         {
-            printf("\ndeadend ......solving!!!! by giving  %d th stick to the philosopher 1\n", users);
+            printf("\nDeadend ......solving!!!! by giving  %d th stick to the philosopher 1\n", users);
 
             phil[0].left_hand = 1;
             phil[0].left->right_hand = 0;
@@ -89,12 +89,12 @@ atr:
                 {
                     phil[i].left_hand = 1;
                     phil[i].comp = 0;
-                    printf("philosopher %d has picked up the left stick and right stick and ready to dine\n", phil[i].id);
+                    printf("Philosopher %d has picked up the left stick and right stick!\n", phil[i].id);
                 }
                 else
                 {
                     if (p)
-                        printf("philosopher %d is waiting for the left stick till the left  philosopher to complete his/her turn\n", phil[i].id);
+                        printf("Philosopher %d is unable to find the left stick!\n", phil[i].id);
                 }
             }
         }
@@ -109,7 +109,7 @@ atr:
                 phil[i].bust_i--;
                 if (phil[i].bust_i == 0)
                 {
-                    printf("philosopher %d has finished his job and sticks are placed back\n", phil[i].id);
+                    printf("Philosopher %d has finished his job and sticks are ready to be placed back!\n", phil[i].id);
                     p = 1;
                     left--;
                     phil[i].right_hand = 0;
@@ -130,7 +130,7 @@ atr:
     {
         if (phil[i].comp > 0)
             dead = 0;
-        printf(" philosopher id: %d -> arrival %d bust time %d completed at  %d  \n", phil[i].id, phil[i].arvl, phil[i].bust, phil[i].comp);
+        printf("Philosopher id: %d -> arrival time: %d, burst time: %d, completion time: %d  \n", phil[i].id, phil[i].arvl, phil[i].bust, phil[i].comp);
     }
     if (dead)
     {
