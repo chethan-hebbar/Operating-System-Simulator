@@ -75,14 +75,14 @@ int main()
     int y = 0;      //wait checker
     while (prod_count + cust_count)
     {
-        /*  if (prod_count==0 && cust_count>0 && status==0 )
+          if (prod_count==0 && cust_count>0 && status==0 )
     {
         break; // point number 11
     }
     else if(cust_count==0 && prod_count>0 &&status==buffer)
     {
         break;
-    }*/
+    }
 
         for (i = 0; i < total; i++)
         {
@@ -109,13 +109,13 @@ int main()
             u[i].comp = cpu_time;
             if (u[i].producer)
             {
-                printf("producer process %d initiated and  completed at %d\n", u[i].id, u[i].comp);
+                printf("producer process %d initiated at %d and  completed at %d\n", u[i].id, u[i].comp-u[i].bust, u[i].comp);
                 status++;
                 prod_count--;
             }
             else
             {
-                printf("consumer process %d initiated and completed at %d\n", u[i].id, u[i].comp);
+                printf("consumer process %d initiated at %d and  completed at %d\n", u[i].id, u[i].comp-u[i].bust, u[i].comp);
                 status--;
                 cust_count--;
             }
@@ -149,8 +149,8 @@ int main()
         if (u[i].p == 0)
         {
             if (u[i].comp == -1)
-                printf("costumer process %d arrived at %d   after bust time %d...couldnt complete ERROR due to empty buffer and no producer to produce it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("costumer process %d arrived at %d   with bust time %d...couldnt complete ERROR due to empty buffer and no producer to produce it %d", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
             else
-                printf("costumer process %d arrived at %d   after bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
+                printf("costumer process %d arrived at %d   with bust time %d... completed at time %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
         }
 }
