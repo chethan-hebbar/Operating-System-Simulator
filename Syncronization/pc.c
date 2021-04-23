@@ -140,7 +140,7 @@ int PC()
         if (u[i].p)
         {
             if (u[i].comp == -1)
-                printf("[+]COULDNT CONSUME DUE TO BUFFER OVERFLOW... PRODUCER process: %d arrived at: %d   after burst time: %d...\n", u[i].id, u[i].arvl, u[i].bust);
+                printf("[+]COULDNT PRODUCE DUE TO BUFFER OVERFLOW... PRODUCER process: %d arrived at: %d   after burst time: %d...\n", u[i].id, u[i].arvl, u[i].bust);
             else
                 printf("PRODUCER process: %d arrived at: %d   after burst time: %d... completed at time: %d\n", u[i].id, u[i].arvl, u[i].bust, u[i].comp);
         }

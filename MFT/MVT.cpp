@@ -113,16 +113,20 @@ int InsertNext(string id, int size)
     int position = -1;
     for (int i = next_fit_1; i < P.size(); i++)
     {
-        if (P[i].size == size)
+        if (P[i].PID == "#" && P[i].size >= size)
         {
+            if (P[i].size == size)
+            {
+                frag_space -= size;
+                P[i].PID = id;
+                return size;
+            }
+            P[i].size -= size;
+            next_fit_1 = i;
+            P.insert(P.begin() + i, {id, size});
             frag_space -= size;
-            P[i].PID = id;
             return size;
         }
-        P[i].size -= size;
-        P.insert(P.begin() + i, {id, size});
-        frag_space -= size;
-        return size;
     }
     if (position < 0)
     {
