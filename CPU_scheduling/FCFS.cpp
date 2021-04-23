@@ -79,10 +79,22 @@ int FCFS()
         cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt << "\t" << ct[i] << "\t" << tat[i] << "\t" << wt[i] << endl;
     }
     cout << endl;
+    cout << "Gantt chart:" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if (i > 0 && p[i].at > ct[i - 1])
+        {
+            cout << "|t=" << ct[i - 1] << "   CPU idle    t=" << p[i].at;
+            cout << "|t=" << p[i].at << "   P" << p[i].id << "    t=" << ct[i];
+        }
+        else
+            cout << "|t=" << ct[i] - p[i].bt << "   P" << p[i].id << "    t=" << ct[i];
+    }
+    cout << "|" << endl
+         << endl;
     float avgTAT = (float)total_TAT / (float)n;
     float avgWT = (float)total_WT / (float)n;
     cout << "Average TAT: " << avgTAT << endl
          << "Average WT: " << avgWT << endl;
     return 0;
 }
-

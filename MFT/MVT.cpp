@@ -104,6 +104,35 @@ int InsertFirst(string id, int size)
 
     return -1;
 }
+int next_fit_1 = 0;
+int InsertNext(string id, int size)
+{
+    if (frag_space < size)
+        return false;
+
+    int position = -1;
+    for (int i = next_fit_1; i < P.size(); i++)
+    {
+        if (P[i].PID == "#" && P[i].size >= size)
+        {
+            if (P[i].size == size)
+            {
+                frag_space -= size;
+                P[i].PID = id;
+                return size;
+            }
+            P[i].size -= size;
+            next_fit_1 = i;
+            P.insert(P.begin() + i, {id, size});
+            frag_space -= size;
+            return size;
+        }
+    }
+    if (position < 0)
+    {
+        return -1;
+    }
+}
 
 int InsertWorst(string id, int size){
     // cout << "frag space : " << frag_space << "\n";
@@ -165,8 +194,9 @@ int MVT(){
     bool ok = true;
     P.push_back({"#", total_size});
     int y;
-    cout << "1. First Fit\n2. Worst Fit\n3. Best Fit\n\nEnter option: ";
+    cout << "1. First Fit\n2. Worst Fit\n3. Best Fit\n4. Next Fit\nEnter option: ";
     cin >> y;
+    next_fit_1 = 0;
     while (ok)
     {
         cout << "1. Insert   2. Delete   3. Exit\nEnter option : ";
@@ -184,6 +214,7 @@ int MVT(){
             if(y == 1) result = InsertFirst(id,size);
             else if(y == 2) result = InsertWorst(id,size);
             else if(y == 3) result = InsertBest(id,size);
+            else if(y == 4) result = InsertNext(id,size);
             if (result > 0)
                 cout << "Sucessfully allocated!\n";
             else if (result == 0)
@@ -206,5 +237,6 @@ int MVT(){
             ok = false;
         }
     }
+    P.clear();
     return 0;
 }

@@ -34,6 +34,7 @@ using namespace std;
 #include "../Syncronization/rw.c"
 #include "../Bankers_Algorithm/bankers.h"
 #include "../Page_Replacement/PageReplacement.h"
+#include "../Page_Replacement/Page.c"
 
 int main()
 {
@@ -165,6 +166,15 @@ int main()
             system("PAUSE");
             break;
         case 6:
+            cout << "\n1.With page addresses (FIFO)\n2. Without page addresses\nEnter option: ";
+            int op;
+            cin >> op;
+            if(op == 1){
+                system("CLS");
+                Page();
+                system("PAUSE");
+                break;
+            }
             system("CLS");
             PAGE();
             system("PAUSE");
