@@ -301,19 +301,16 @@ int next_fit()
   bool intFrag = false;
 
   int cycle = 0;
-  printf("Counter is %d and Number of partitions = %d", nextCounter, n);
   for (int i = nextCounter; i <= n; i++)
   {
 
     bool notFree = false;
-    printf("Entered the loop\n");
 
     for (int j = 0; j < 50; j++)
     {
 
       if (processes[j] == i)
       {
-        printf("Partition %d is full with process %d\n", i, j);
         notFree = true;
         if (partitions[i] - pSizes[j] >= pSizes[pId])
         {
@@ -325,22 +322,18 @@ int next_fit()
 
     if (notFree == false)
     {
-      printf("Partition %d is free\n", i);
 
       if (pSizes[pId] <= partitions[i])
       {
-        printf("Partition %d can hold process\n", i);
         nextId = i;
 
         if (nextCounter == n)
         {
-          printf("Counter is updated to 0\n");
           nextCounter = 0;
         }
 
         else
         {
-          printf("Counter updated to %d\n", i);
           nextCounter = i + 1;
         }
 
@@ -360,23 +353,23 @@ int next_fit()
 
     if (intFrag == true)
     {
-      printf("Internal Fragmentation for process %d and counter = %d\n", pId, nextCounter);
+      printf("Internal Fragmentation for process %d\n", pId);
     }
 
     else if (pSizes[pId] <= unused_space)
     {
-      printf("External Fragmentation for process %d and counter = %d\n", pId, nextCounter);
+      printf("External Fragmentation for process %d\n", pId);
     }
 
     else
     {
-      printf("Process size is larger than all available partitions and counter = %d\n", nextCounter);
+      printf("Process size is larger than all available partitions\n");
     }
   }
 
   else
   {
-    printf("Process %d can be inserted at partition %d and counter = %d\n", pId, nextId, nextCounter);
+    printf("Process %d can be inserted at partition %d\n", pId, nextId);
     processes[pId] = nextId;
   }
 
@@ -414,7 +407,7 @@ int display()
 }
 
 // driver function
-int MFT()
+int main()
 {
 
   printf("Enter the number of partitions :: ");
@@ -427,8 +420,7 @@ int MFT()
 
   for (n = 0; n < 50; n++)
   {
-
-    if (n > givenN || sum >= size)
+    if (n >= givenN || sum >= size)
     {
       printf("Invalid partition size or size exceeded!\n");
       --n;
