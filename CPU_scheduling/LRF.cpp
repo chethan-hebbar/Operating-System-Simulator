@@ -49,7 +49,7 @@ int LRF()
             time = time + maxBT;
             ct[pid] = time;
             complete++;
-            cout << " At t= " << time << "Process " << pid << " is completed" << endl;
+            cout << " At t= " << time << "Process " << p[pid].id << " is completed" << endl;
         }
         else
         {

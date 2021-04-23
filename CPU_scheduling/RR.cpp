@@ -62,7 +62,7 @@ int RR()
         }
         if (p[j].bt == 0)
         {
-            cout << "At time: " << time << " process " << p[j].id + 1 << " finishes execution" << endl;
+            cout << "At time: " << time << " process " << p[j].id << " finishes execution" << endl;
             ct[j] = time;
             completed++;
         }

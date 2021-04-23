@@ -45,7 +45,7 @@ int LRJF()
             if (p[i].in_queue == 0 && p[i].completed == 0 && p[i].at <= time)
             {
                 p[i].in_queue = 1;
-                cout << "At time= " << time << " process " << i << " is enqueued " << endl;
+                cout << "At time= " << time << " process " << p[i].id << " is enqueued " << endl;
             }
         }
         int maxBT = -1, minBTP = -1;
@@ -60,13 +60,13 @@ int LRJF()
         if (minBTP != -1)
         {
             int cut = min(timeQuanta, p[minBTP].bt);
-            cout << "At time= " << time << " process " << minBTP << " is processed for time= "
+            cout << "At time= " << time << " process " << p[minBTP].id << " is processed for time= "
                  << cut << endl;
             p[minBTP].bt -= cut;
             time += cut;
             if (p[minBTP].bt == 0)
             {
-                cout << "At time= " << time << " process " << minBTP << " is completed " << endl;
+                cout << "At time= " << time << " process " << p[minBTP].id << " is completed " << endl;
                 completed++;
                 p[minBTP].completed = 1;
                 p[minBTP].ct = time;
