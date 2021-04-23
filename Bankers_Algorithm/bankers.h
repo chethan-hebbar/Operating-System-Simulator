@@ -31,7 +31,7 @@ int Bankers()
 	        scanf("%d", &maxres[i]);
     	}
  
-   	printf("\nEnter allocated resources for processes:\n");
+   	printf("\nEnter allocated resources for processes: \n");
     	for (i = 0; i < processe; i++) 
 	{
 	        for(j = 0; j < resources; j++) 
@@ -40,7 +40,7 @@ int Bankers()
         	}
     	}
  
-    	printf("\nEnter required resources for processes:\n");
+    	printf("\nEnter required resources for processes: \n");
     	for (i = 0; i < processe; i++) 
 	{
         	for(j = 0; j < resources; j++) 
@@ -55,7 +55,7 @@ int Bankers()
 	        printf("\t%d", maxres[i]);
 	}
  
-    	printf("\n\nThe Allocated Resources Table:\n");
+    	printf("\n\nThe Allocated Resources Table: \n");
     	for (i = 0; i < processe; i++) 
 	{
 	        for (j = 0; j < resources; j++) 
@@ -65,7 +65,7 @@ int Bankers()
 		printf("\n");
     	}
  
-    	printf("\nThe Required Resources Table:\n");
+    	printf("\nThe Required Resources Table: \n");
     	for (i = 0; i < processe; i++) 
 	{
         	for (j = 0; j < resources; j++) 
@@ -83,7 +83,7 @@ int Bankers()
         	}
     	}
  
-    	printf("\nAllocated resources ::");
+    	printf("\nAllocated resources :: ");
     	for (i = 0; i < resources; i++) 
 	{
         	printf("\t%d", allocation[i]);
@@ -94,7 +94,7 @@ int Bankers()
 	        available[i] = maxres[i] - allocation[i];
 	}
  
-    	printf("\nAvailable resources ::");
+    	printf("\nAvailable resources :: ");
     	for (i = 0; i < resources; i++) 
 	{
         	printf("\t%d", available[i]);
@@ -141,14 +141,14 @@ int Bankers()
         	} 
 		else 
 		{
-            		printf("\nThe system is in a safe state");
+            		printf("\nThe system is in a safe state ");
 					printf("\nThe safe sequence :: ");
 
 					for(int i = 0; i < processe; i++){
 						printf("P%d ", sequence[i]);
 					}
 
-            		printf("\nFinal available resources ::");
+            		printf("\nFinal available resources :: ");
  
             		for (i = 0; i < resources; i++) 
 			{

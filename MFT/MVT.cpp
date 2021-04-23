@@ -206,5 +206,6 @@ int MVT(){
             ok = false;
         }
     }
+    P.clear();
     return 0;
 }

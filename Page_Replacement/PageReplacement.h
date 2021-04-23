@@ -17,7 +17,7 @@ int getData()
     printf("Enter the page reference sequence: \n");
     for(i=0; i<pn; i++)
         scanf("%d",&in[i]);
-    printf("Enter no of frames:");
+    printf("Enter no of frames: ");
     scanf("%d",&nf);
 
     return 0;
