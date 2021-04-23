@@ -33,7 +33,7 @@ int Bankers()
  
    	printf("\nEnter allocated resources for processes:\n");
     	for (i = 0; i < processe; i++) 
-	{
+	{	printf("For process %d :: ", i);
 	        for(j = 0; j < resources; j++) 
 		{
   			scanf("%d", &current[i][j]);
@@ -42,7 +42,7 @@ int Bankers()
  
     	printf("\nEnter required resources for processes:\n");
     	for (i = 0; i < processe; i++) 
-	{
+	{		printf("For process %d :: ", i);
         	for(j = 0; j < resources; j++) 
 		{
             		scanf("%d", &maximum_claim[i][j]);
