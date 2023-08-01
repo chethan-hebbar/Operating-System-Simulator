@@ -1,7 +1,7 @@
-# CS255_Mini_Project
-OS lab mini project menu driven implementation
+# Operating System Simulator
+CS255 OS lab mini project. Menu driven implementation of all the core concepts of operating systems
 
-# All programs divided into folders for ease of access
+# Implementations are divided based on their category of OS concept
 Folders
 - Scheduling
 - Synchronization
